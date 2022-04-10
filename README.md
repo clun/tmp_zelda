@@ -1,8 +1,6 @@
 # Working with Zelda
 
-## DATA MODEL
-
-### Definition des tables
+### Data Model
 
 ```sql
 /* ----------------------------------------- */
@@ -54,8 +52,7 @@ CREATE TABLE IF NOT EXISTS inventory_by_character (
 WITH CLUSTERING ORDER BY (object_name ASC);
 ```
 
-## DATASET
-
+### DATASET
 
 ```sql
 /* ----------------------------------------- */
