@@ -97,7 +97,7 @@ VALUES(11111111-1111-1111-1111-111111111111, 959538f4-fafb-4113-8dea-80ce9a62581
 
 ## Services
 
-### Create Character
+### C1 - Create Character
 
 - **CQL**
 
@@ -116,9 +116,32 @@ INSERT INTO characters(
 ```yaml
 ```
 
-### Does a character exist ?
+### C2 - Find character by id
+
+- **CQL**
+
+```sql
+select * from characters where character_id=11111111-1111-1111-1111-111111111111
+```
+
+### C3 - Is Character name in use ?
+
+- **CQL**
 
 ```sql
 select count(character_id) from characters where name='Ania';
 select count(character_id) from characters where name='Link';
 ```
+
+- **GraphQL**
+
+```yaml
+```
+
+### C4 - Is Character name in use ?
+
+```sql
+select count(character_id) from characters where name='Ania';
+select count(character_id) from characters where name='Link';
+```
+
