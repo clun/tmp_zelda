@@ -97,6 +97,25 @@ VALUES(11111111-1111-1111-1111-111111111111, 959538f4-fafb-4113-8dea-80ce9a62581
 
 ## Services
 
+### Create Character
+
+- **CQL**
+
+```sql
+INSERT INTO characters(
+  character_id, name, stamina, 
+  speed, max_health, current_health,
+  weapon_slot, shield_slot) VALUES (
+  11111111-1111-1111-1111-111111111111, 'Cedrick', 10, 1, 6, 6, 
+  03e81ae3-315a-4f17-8ea7-6119d7804145, 
+  a7fdd361-4ac4-4f64-8ed0-ab9a951fc59f);
+```
+
+- GraphQL
+
+```yaml
+```
+
 ### Does a character exist ?
 
 ```sql
