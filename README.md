@@ -5,6 +5,10 @@
 ### Definition des tables
 
 ```sql
+/* ----------------------------------------- */
+/* ----             Objects           ------ */
+/* ----------------------------------------- */
+
 CREATE TABLE IF NOT EXISTS  objects (
 	object_id UUID PRIMARY KEY,
     name TEXT,
@@ -15,7 +19,11 @@ CREATE TABLE IF NOT EXISTS  objects (
     type TEXT,
     stackable BOOLEAN,
 	special MAP<TEXT,INT>);
-  
+ 
+/* ----------------------------------------- */
+/* ----             Characters        ------ */
+/* ----------------------------------------- */
+
 /** A character could be renamed. */
 CREATE TABLE IF NOT EXISTS characters (
 	character_id UUID PRIMARY KEY,
@@ -26,11 +34,15 @@ CREATE TABLE IF NOT EXISTS characters (
  	current_health INT,
 	weapon_slot UUID,
 	shield_slot UUID);
-
+	
 /* Search character by name (if exist) with low cardinality. */
 CREATE CUSTOM INDEX IF NOT EXISTS characters_name_idx ON characters (name) 
 USING 'StorageAttachedIndex' 
 WITH OPTIONS = {'case_sensitive': 'false', 'normalize': 'true', 'ascii': 'true'}; 
+
+/* ----------------------------------------- */
+/* ----             Inventory         ------ */
+/* ----------------------------------------- */
 
 CREATE TABLE IF NOT EXISTS inventory_by_character (
 	character_id UUID,
@@ -76,10 +88,15 @@ INSERT INTO characters(character_id, name, stamina, speed,
 			max_health, current_health,
  			weapon_slot, shield_slot) VALUES (
  			33333333-3333-3333-3333-333333333333, 'Aaron', 10, 1, 6, 6, 03e81ae3-315a-4f17-8ea7-6119d7804145, a7fdd361-4ac4-4f64-8ed0-ab9a951fc59f);	
+			
+/* ----------------------------------------- */
+/* ----             Inventory         ------ */
+/* ----------------------------------------- */
 
-
+/* 10 Apples, weight is still 2 as stackable */
+INSERT INTO inventory(character_id, object_id, object_name, weight, qty) 
+VALUES(11111111-1111-1111-1111-111111111111, 959538f4-fafb-4113-8dea-80ce9a625816, 'Apple', 2, 10);
 ```
-
 
 ## Services
 
