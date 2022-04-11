@@ -1,12 +1,12 @@
 # Working with Zelda
 
-## Data Model
+## 1. Data Model
 
-### Create Tables and Indices
+### 1.1 - Create Tables and Indices
 
 <p/>
 <details>
-<summary><b> Create Tables with a CQL Query(Cassandra Query Language)</b></summary>
+<summary><b> ✅ Create Tables with a CQL Query(Cassandra Query Language)</b></summary>
 
 ```sql
 /* ----------------------------------------- */
@@ -62,7 +62,7 @@ WITH CLUSTERING ORDER BY (object_name ASC);
 
 <p/>
 <details>
-<summary><b> Create Tables with GraphQL</b></summary>
+<summary><b> ✅ Create Tables with GraphQL</b></summary>
 
 <p>Please use endpoint ending with `api/graphql-schema`</p>
 	
@@ -138,11 +138,11 @@ mutation {
 <p/>
 
 
-### DATASET
+### 1.2 - Insert Dataset 
 
 <p/>
 <details>
-<summary><b> Insert Data with a CQL Query(Cassandra Query Language)</b></summary>
+<summary><b> ✅ Insert Data with a CQL Query(Cassandra Query Language)</b></summary>
 
 ```sql
 /* ----------------------------------------- */
@@ -193,7 +193,7 @@ VALUES(11111111-1111-1111-1111-111111111111, 959538f4-fafb-4113-8dea-80ce9a62581
 
 <p/>
 <details>
-<summary><b> Insert Data with GraphQL</b></summary>
+<summary><b> ✅ Insert Data with GraphQL</b></summary>
 
 <p>Please use endpoint ending with `api/zelda`</p>
 	
@@ -267,11 +267,13 @@ mutation dataset_objects {
 </details>
 <p/>
 	
-## Services
+## 2. Services
 
-### C1 - Create a character
+### 2.1 - Characters
 
-- **CQL**
+**Create Character**
+
+- *CQL*
 
 ```sql
 INSERT INTO characters(
@@ -283,9 +285,24 @@ INSERT INTO characters(
   a7fdd361-4ac4-4f64-8ed0-ab9a951fc59f);
 ```
 
-- GraphQL
+- *GraphQL*
 
 ```yaml
+mutation create_character {
+  cedrick: insertcharacters(
+    value: { 
+      character_id: "11111111-1111-1111-1111-111111111111"
+      name: "Cedrick"
+      stamina: 10
+      speed: 1
+      max_health: 6
+      current_health: 6
+      weapon_slot: "03e81ae3-315a-4f17-8ea7-6119d7804145"
+      shield_slot: "a7fdd361-4ac4-4f64-8ed0-ab9a951fc59f"
+    }) {
+    value{name}
+  }
+}
 ```
 
 ### C2 - Find character by id
