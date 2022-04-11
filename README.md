@@ -2,7 +2,7 @@
 
 ## Data Model
 
-### Create Tables
+### Create Tables and Indices
 
 <p/>
 <details>
@@ -138,9 +138,11 @@ mutation {
 <p/>
 
 
-
-
 ### DATASET
+
+<p/>
+<details>
+<summary><b> Insert Data with a CQL Query(Cassandra Query Language)</b></summary>
 
 ```sql
 /* ----------------------------------------- */
@@ -182,10 +184,24 @@ INSERT INTO characters(character_id, name, stamina, speed,
 INSERT INTO inventory(character_id, object_id, object_name, weight, qty) 
 VALUES(11111111-1111-1111-1111-111111111111, 959538f4-fafb-4113-8dea-80ce9a625816, 'Apple', 2, 10);
 ```
+</details>
+<p/>
 
+<p/>
+<details>
+<summary><b> Insert Data with GraphQL</b></summary>
+
+<p>Please use endpoint ending with `api/zelda`</p>
+	
+```yaml
+
+```
+</details>
+<p/>
+	
 ## Services
 
-### C1 - Create Character
+### C1 - Create a character
 
 - **CQL**
 
