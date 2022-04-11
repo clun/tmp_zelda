@@ -124,7 +124,14 @@ mutation {
       { name: "qty", type: {basic: INT} }
     ]
   )
-  
+  index_character: createIndex(
+    keyspaceName:"zelda"
+    indexName: "characters_name_idx"
+    tableName: "characters"
+    columnName: "name"
+    ifNotExists:true
+    indexType: "StorageAttachedIndex"
+  )
 }
 ```
 </details>
