@@ -271,10 +271,9 @@ mutation dataset_objects {
 
 ### 2.1 - Characters
 
-**Create Character**
+- **Create Character**
 
-- *CQL*
-
+*CQL*:
 ```sql
 INSERT INTO characters(
   character_id, name, stamina, 
@@ -285,8 +284,7 @@ INSERT INTO characters(
   a7fdd361-4ac4-4f64-8ed0-ab9a951fc59f);
 ```
 
-- *GraphQL*
-
+*GraphQL*:
 ```yaml
 mutation create_character {
   cedrick: insertcharacters(
@@ -305,32 +303,105 @@ mutation create_character {
 }
 ```
 
-### C2 - Find character by id
+- **Find character by id**
 
-- **CQL**
-
+*CQL*:
 ```sql
 select * from characters where character_id=11111111-1111-1111-1111-111111111111
 ```
 
-### C3 - Is Character name in use ?
-
-- **CQL**
-
-```sql
-select count(character_id) from characters where name='Ania';
-select count(character_id) from characters where name='Link';
+*GraphQL*:
+```yaml
+query find_character_by_id {
+  characters(value: { character_id:"11111111-1111-1111-1111-111111111111" }) {
+    values { character_id}
+  }
+}
 ```
+	
+- **Find character by name**
 
-- **GraphQL**
+*CQL*:
+```sql
+select * from characters where name='Ania';
+
+*GraphQL*:
+```yaml
+query find_character_by_name {
+  characters(value: { name:"Ania" }) {
+    values { character_id}
+  }
+}
+```
+	
+- **You got an Heart (increase life)**
 
 ```yaml
+mutation you_got_an_heart {
+  updatecharacters(
+    value: { 
+      character_id: "11111111-1111-1111-1111-111111111111"
+      max_health: 8
+      current_health: 8
+    }) {
+    value{max_health}
+  }
+}
+```
+	
+- **Change Life (hit, heart)**
+
+```yaml
+mutation change_life {
+  updatecharacters(
+    value: { 
+      character_id: "11111111-1111-1111-1111-111111111111"
+      current_health: 7
+    }) {
+    value{current_health}
+  }
+}
+```
+	
+- **Equip Weapon**
+
+```yaml
+mutation equip_weapon {
+  updatecharacters(
+    value: { 
+      character_id: "11111111-1111-1111-1111-111111111111"
+      weapon_slot: "03e81ae3-315a-4f17-8ea7-6119d7804145"
+    }) {
+    value{weapon_slot}
+  }
+}
 ```
 
-### C4 - Is Character name in use ?
-
-```sql
-select count(character_id) from characters where name='Ania';
-select count(character_id) from characters where name='Link';
+- **Drop Weapon**
+	
+```yaml
+mutation equip_weapon {
+  updatecharacters(
+    value: { 
+      character_id: "11111111-1111-1111-1111-111111111111"
+      weapon_slot: "03e81ae3-315a-4f17-8ea7-6119d7804145"
+    }) {
+    value{weapon_slot}
+  }
+}
 ```
+
+- **Delete Character**
+	
+```yaml
+mutation drop_weapon {
+  deletecharacters(
+    value: { 
+      character_id: "11111111-1111-1111-1111-111111111111"
+    }) {
+    value{character_id}
+  }
+}
+```	
+	
 
