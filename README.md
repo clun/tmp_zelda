@@ -273,18 +273,6 @@ mutation dataset_objects {
 
 - **Create Character**
 
-*CQL*:
-```sql
-INSERT INTO characters(
-  character_id, name, stamina, 
-  speed, max_health, current_health,
-  weapon_slot, shield_slot) VALUES (
-  11111111-1111-1111-1111-111111111111, 'Cedrick', 10, 1, 6, 6, 
-  03e81ae3-315a-4f17-8ea7-6119d7804145, 
-  a7fdd361-4ac4-4f64-8ed0-ab9a951fc59f);
-```
-
-*GraphQL*:
 ```yaml
 mutation create_character {
   cedrick: insertcharacters(
@@ -430,5 +418,18 @@ mutation drop_weapon {
   }
 }
 ```	
-	
 
+### 2.2 - Inventory
+	
+- **Loot Object**
+	
+```yaml
+
+```
+
+- **Drop Object from inventory**	
+```yaml
+
+```
+
+	
