@@ -303,29 +303,28 @@ mutation create_character {
 }
 ```
 
-- **Find character by id**
+- **Check if exist**
 
-*CQL*:
-```sql
-select * from characters where character_id=11111111-1111-1111-1111-111111111111
-```
-
-*GraphQL*:
-```yaml
+	```yaml
 query find_character_by_id {
   characters(value: { character_id:"11111111-1111-1111-1111-111111111111" }) {
     values { character_id}
   }
 }
 ```
+
+- **Find character by id**
+
+```yaml
+query find_character_by_id {
+  characters(value: { character_id:"11111111-1111-1111-1111-111111111111" }) {
+    values { name,character_id,current_health,max_health,stamina,speed,weapon_slot,shield_slot}
+  }
+}
+```
 	
 - **Find character by name**
 
-*CQL*:
-```sql
-select * from characters where name='Ania';
-
-*GraphQL*:
 ```yaml
 query find_character_by_name {
   characters(value: { name:"Ania" }) {
@@ -380,13 +379,13 @@ mutation equip_weapon {
 - **Drop Weapon**
 	
 ```yaml
-mutation equip_weapon {
+mutation drop_weapon {
   updatecharacters(
     value: { 
       character_id: "11111111-1111-1111-1111-111111111111"
-      weapon_slot: "03e81ae3-315a-4f17-8ea7-6119d7804145"
+      weapon_slot: null
     }) {
-    value{weapon_slot}
+    value{character_id}
   }
 }
 ```
