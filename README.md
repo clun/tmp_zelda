@@ -305,7 +305,7 @@ mutation create_character {
 
 - **Check if exist**
 
-	```yaml
+```yaml
 query find_character_by_id {
   characters(value: { character_id:"11111111-1111-1111-1111-111111111111" }) {
     values { character_id}
@@ -362,7 +362,7 @@ mutation change_life {
 }
 ```
 	
-- **Equip Weapon**
+- **Equip `Weapon`**
 
 ```yaml
 mutation equip_weapon {
@@ -376,7 +376,7 @@ mutation equip_weapon {
 }
 ```
 
-- **Drop Weapon**
+- **Drop `Weapon`**
 	
 ```yaml
 mutation drop_weapon {
@@ -384,6 +384,34 @@ mutation drop_weapon {
     value: { 
       character_id: "11111111-1111-1111-1111-111111111111"
       weapon_slot: null
+    }) {
+    value{character_id}
+  }
+}
+```
+	
+- **Equip `Shield`**
+
+```yaml
+mutation equip_shield {
+  updatecharacters(
+    value: { 
+      character_id: "11111111-1111-1111-1111-111111111111"
+      shield_slot: "a7fdd361-4ac4-4f64-8ed0-ab9a951fc59f"
+    }) {
+    value{character_id}
+  }
+}
+```
+
+- **Drop `Shield`**
+	
+```yaml
+mutation drop_shield {
+  updatecharacters(
+    value: { 
+      character_id: "11111111-1111-1111-1111-111111111111"
+      shield_slot: null
     }) {
     value{character_id}
   }
