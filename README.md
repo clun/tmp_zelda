@@ -149,13 +149,17 @@ mutation {
 /* ----             Objects           ------ */
 /* ----------------------------------------- */
 
-INSERT INTO objects (object_id, name, description, image, value_in_rupees, weight, type, stackable, special) VALUES (a7fdd361-4ac4-4f64-8ed0-ab9a951fc59f, 'Boko Shield', 'Found close to the blue Bokoblins, protects you from attack.', 'https://www.zeldadungeon.net/wiki/images/5/54/Boko-shield.png', 8, 1, 'shield', false, { 'durability': 7 });
+INSERT INTO objects (object_id, name, description, image, value_in_rupees, weight, type, stackable, special) 
+VALUES (a7fdd361-4ac4-4f64-8ed0-ab9a951fc59f, 'Boko Shield', 'Found close to the blue Bokoblins, protects you from attack.', 'https://www.zeldadungeon.net/wiki/images/5/54/Boko-shield.png', 8, 1, 'shield', false, { 'durability': 7 });
 
-INSERT INTO objects (object_id, name, description, image, value_in_rupees, weight, type, stackable, special) VALUES (03e81ae3-315a-4f17-8ea7-6119d7804145, 'Traveler’s Sword', 'Found in the Great Plateau, dropped by Bokoblins.', 'https://www.zeldadungeon.net/wiki/images/7/7b/Travelers-sword.png', 10, 1, 'sword', false, { 'durability': 7, 'damage': 5 });
+INSERT INTO objects (object_id, name, description, image, value_in_rupees, weight, type, stackable, special) 
+VALUES (03e81ae3-315a-4f17-8ea7-6119d7804145, 'Traveler’s Sword', 'Found in the Great Plateau, dropped by Bokoblins.', 'https://www.zeldadungeon.net/wiki/images/7/7b/Travelers-sword.png', 10, 1, 'sword', false, { 'durability': 7, 'damage': 5 });
 
-INSERT INTO objects (object_id, name, description, image, value_in_rupees, weight, type, stackable, special) VALUES (959538f4-fafb-4113-8dea-80ce9a625816, 'Apple', 'Found on trees or barrels, restores half of a heart.', 'https://www.zeldadungeon.net/wiki/images/c/c3/Apple-botw.png', 2, 1, 'consumable', true, { 'health': 1});
+INSERT INTO objects (object_id, name, description, image, value_in_rupees, weight, type, stackable, special) 
+VALUES (959538f4-fafb-4113-8dea-80ce9a625816, 'Apple', 'Found on trees or barrels, restores half of a heart.', 'https://www.zeldadungeon.net/wiki/images/c/c3/Apple-botw.png', 2, 1, 'consumable', true, { 'health': 1});
 
-INSERT INTO objects (object_id, name, description, image, value_in_rupees, weight, type, stackable, special) VALUES (638fd732-51fb-4230-8a87-2beb9e164691, 'Korok Seeds', 'Used to increase inventory squares.', 'https://www.zeldadungeon.net/wiki/images/0/01/Korok_Seed_-_HWAoC.png', 1, 0, 'item', true, { 'max_inventory_squares_plus': 1});
+INSERT INTO objects (object_id, name, description, image, value_in_rupees, weight, type, stackable, special) 
+VALUES (638fd732-51fb-4230-8a87-2beb9e164691, 'Korok Seeds', 'Used to increase inventory squares.', 'https://www.zeldadungeon.net/wiki/images/0/01/Korok_Seed_-_HWAoC.png', 1, 0, 'item', true, { 'max_inventory_squares_plus': 1});
 
 /* ----------------------------------------- */
 /* ----             Characters        ------ */
@@ -194,7 +198,71 @@ VALUES(11111111-1111-1111-1111-111111111111, 959538f4-fafb-4113-8dea-80ce9a62581
 <p>Please use endpoint ending with `api/zelda`</p>
 	
 ```yaml
-
+mutation dataset_objects {
+  object_boko_shield: insertobjects(
+    value: { 
+      object_id: "a7fdd361-4ac4-4f64-8ed0-ab9a951fc59f"
+      name:"Boko Shield"
+      description: "Found close to the blue Bokoblins, protects you from attack."
+      image: "https://www.zeldadungeon.net/wiki/images/5/54/Boko-shield.png"
+      value_in_rupees: 8
+      weight: 1
+      type: "shield"
+      stackable: false
+      special: { key: "durability", value: 7 }
+    }) {
+    	value{name}
+  }
+  
+	object_traveler_sword: insertobjects(
+    value: { 
+      object_id: "03e81ae3-315a-4f17-8ea7-6119d7804145"
+      name:"Traveler’s Sword"
+      description: "Found in the Great Plateau, dropped by Bokoblins."
+      image: "https://www.zeldadungeon.net/wiki/images/7/7b/Travelers-sword.png"
+      value_in_rupees: 10
+      weight: 1
+      type: "sword"
+      stackable: false
+      special: [
+        { key: "durability", value: 7 }
+        { key: "damage", value: 5 } 
+      ]
+    }) {
+    	value{name}
+    }
+  
+   object_apple: insertobjects(
+    value: { 
+      object_id: "959538f4-fafb-4113-8dea-80ce9a625816"
+      name:"Apple"
+      description: "Found on trees or barrels, restores half of a heart."
+      image: "https://www.zeldadungeon.net/wiki/images/c/c3/Apple-botw.png"
+      value_in_rupees: 2
+      weight: 1
+      type: "consumable"
+      stackable: true
+      special: { key: "health", value: 1 }
+    }) {
+    	value{name}
+  }
+  
+  object_korok_seed: insertobjects(
+    value: { 
+      object_id: "959538f4-fafb-4113-8dea-80ce9a625816"
+      name:"Korok Seeds"
+      description: "Used to increase inventory squares."
+      image: "https://www.zeldadungeon.net/wiki/images/0/01/Korok_Seed_-_HWAoC.png"
+      value_in_rupees: 1
+      weight: 0
+      type: "item"
+      stackable: true
+      special: { key: "max_inventory_squares_plus", value: 1 }
+    }) {
+    	value{name}
+  }
+  
+}
 ```
 </details>
 <p/>
