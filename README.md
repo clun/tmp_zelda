@@ -48,7 +48,7 @@ WITH OPTIONS = {'case_sensitive': 'false', 'normalize': 'true', 'ascii': 'true'}
 /* ----       TABLE Inventory         ------ */
 /* ----------------------------------------- */
 
-CREATE TABLE IF NOT EXISTS inventory_by_character (
+CREATE TABLE IF NOT EXISTS inventory (
 	character_id UUID,
 	object_id UUID,
 	object_name TEXT,
@@ -98,7 +98,7 @@ mutation {
     tableName: "characters"
     partitionKeys: [{ name: "character_id", type: { basic: UUID } }]
     ifNotExists:true
-    values: [
+		values: [
       { name: "name", type: {basic: TEXT} },
       { name: "stamina", type: {basic: INT} },
       { name: "speed", type: {basic: INT} },
@@ -108,6 +108,23 @@ mutation {
       { name: "shield_slot", type: {basic: UUID} }
     ]
   )
+  table_inventory: createTable(
+    keyspaceName: "zelda"
+    tableName: "inventory"
+    partitionKeys: [
+      { name: "character_id", type: { basic: UUID } }
+    ]
+    clusteringKeys: [
+      { name: "object_name", type: {basic: TEXT}, order: "ASC" }
+  	]
+    ifNotExists:true
+		values: [
+      { name: "object_id", type: {basic: UUID} },
+      { name: "weight", type: {basic: INT} },
+      { name: "qty", type: {basic: INT} }
+    ]
+  )
+  
 }
 ```
 </details>
