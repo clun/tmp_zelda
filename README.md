@@ -1,6 +1,8 @@
 # Working with Zelda
 
-### Data Model
+### Create Tables
+
+- **Cql**
 
 ```sql
 /* ----------------------------------------- */
@@ -51,6 +53,55 @@ CREATE TABLE IF NOT EXISTS inventory_by_character (
 	PRIMARY KEY (character_id, object_name))
 WITH CLUSTERING ORDER BY (object_name ASC);
 ```
+
+- **GraphQL**
+
+```yaml
+mutation {
+  table_objects: createTable(
+    keyspaceName:"zelda"
+    tableName:"objects"
+    ifNotExists:true
+    partitionKeys: [ 
+      { name: "object_id", type: {basic: UUID} }
+    ]
+    values: [
+      { name: "description", type: {basic: TEXT} },
+      { name: "image", type: {basic: INT} },
+      { name: "value_in_rupees", type: {basic: INT} },
+      { name: "weight", type: {basic: INT} },
+      { name: "type", type: {basic: TEXT} },
+      { name: "stackable", type: {basic: BOOLEAN} },
+      { name: "special", type: { 
+          basic: MAP, 
+          info: { subTypes: [ 
+            { basic: TEXT }, 
+            { basic: INT }
+           ]
+          }
+      	}
+      }
+    ]
+  )
+  table_characters: createTable(
+    keyspaceName: "zelda"
+    tableName: "characters"
+    partitionKeys: [{ name: "character_id", type: { basic: UUID } }]
+    ifNotExists:true
+		values: [
+      { name: "name", type: {basic: TEXT} },
+      { name: "stamina", type: {basic: INT} },
+      { name: "speed", type: {basic: INT} },
+      { name: "max_health", type: {basic: INT} },
+      { name: "current_health", type: {basic: INT} },
+      { name: "weapon_slot", type: {basic: UUID} },
+      { name: "shield_slot", type: {basic: UUID} }
+    ]
+  )
+}
+```
+
+
 
 ### DATASET
 
