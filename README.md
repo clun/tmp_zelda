@@ -1,12 +1,16 @@
 # Working with Zelda
 
+## Data Model
+
 ### Create Tables
 
-- **Cql**
+<p/>
+<details>
+<summary><b> Create Tables with a CQL Query(Cassandra Query Language)</b></summary>
 
 ```sql
 /* ----------------------------------------- */
-/* ----             Objects           ------ */
+/* ----      TABLE   Objects          ------ */
 /* ----------------------------------------- */
 
 CREATE TABLE IF NOT EXISTS  objects (
@@ -21,7 +25,7 @@ CREATE TABLE IF NOT EXISTS  objects (
 	special MAP<TEXT,INT>);
  
 /* ----------------------------------------- */
-/* ----             Characters        ------ */
+/* ----      TABLE  Characters        ------ */
 /* ----------------------------------------- */
 
 /** A character could be renamed. */
@@ -41,7 +45,7 @@ USING 'StorageAttachedIndex'
 WITH OPTIONS = {'case_sensitive': 'false', 'normalize': 'true', 'ascii': 'true'}; 
 
 /* ----------------------------------------- */
-/* ----             Inventory         ------ */
+/* ----       TABLE Inventory         ------ */
 /* ----------------------------------------- */
 
 CREATE TABLE IF NOT EXISTS inventory_by_character (
@@ -53,9 +57,15 @@ CREATE TABLE IF NOT EXISTS inventory_by_character (
 	PRIMARY KEY (character_id, object_name))
 WITH CLUSTERING ORDER BY (object_name ASC);
 ```
+</details>
+<p/>
 
-- **GraphQL**
+<p/>
+<details>
+<summary><b> Create Tables with GraphQL</b></summary>
 
+<p>Please use endpoint ending with `api/graphql-schema`</p>
+	
 ```yaml
 mutation {
   table_objects: createTable(
@@ -88,7 +98,7 @@ mutation {
     tableName: "characters"
     partitionKeys: [{ name: "character_id", type: { basic: UUID } }]
     ifNotExists:true
-		values: [
+    values: [
       { name: "name", type: {basic: TEXT} },
       { name: "stamina", type: {basic: INT} },
       { name: "speed", type: {basic: INT} },
@@ -100,6 +110,9 @@ mutation {
   )
 }
 ```
+</details>
+<p/>
+
 
 
 
